@@ -1,32 +1,135 @@
-<div class="container">
-	<div class="glass">
-    <div class="shine"></div>
-  </div>
-	<div class="thorns">
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-	</div>
-	<div class="leaves">
-		<div></div>
-		<div></div>
-    <div></div>
-    <div></div>
-	</div>
-	<div class="petals">
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-	</div>
-  <div class="deadPetals">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry with Blinking 3D Rose</title>
+    <style>
+        body {
+            background-color: #0b0c10;
+            color: #f8f8f2;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            padding: 50px;
+            overflow: hidden;
+        }
+
+        .message-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 20px rgba(255, 192, 203, 0.6);
+            display: inline-block;
+            max-width: 500px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        h1 {
+            color: #ffccd5;
+            font-size: 2.5em;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+
+        .heart {
+            color: #ff4d6d;
+            font-size: 2em;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background: #ff4d6d;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff1e4d;
+        }
+
+        /* 3D Rose Canvas */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            animation: blink 3s infinite alternate;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 3D Rose Canvas -->
+    <canvas id="c"></canvas>
+
+    <!-- Sorry Message Container -->
+    <div class="message-container">
+        <h1>I'm Sorry ❤️</h1>
+        <p>Sometimes words fail, and mistakes happen, but my heart never stops caring for you.</p>
+        <p>You mean the world to me, and I'm truly sorry.  Happy Rose day ,My LOVE 💕</p>
+        <div class="heart">💖</div>
+        <button onclick="alert('I love you! 💖')">Forgive Me?</button>
+    </div>
+
+    <script>
+        var b = document.body;
+        var c = document.getElementsByTagName('canvas')[0];
+        var a = c.getContext('2d');
+
+        with (m = Math) C = cos, S = sin, P = pow, R = random;
+        c.width = c.height = f = 500; h = -250;
+
+        function p(a, b, c) {
+            if (c > 60) return [S(a * 7) * (13 + 5 / (.2 + P(b * 4, 4))) - S(b) * 50, b * f + 50, 625 + C(a * 7) * (13 + 5 / (.2 + P(b * 4, 4))) + b * 400, a * 1 - b / 2, a];
+            A = a * 2 - 1;
+            B = b * 2 - 1;
+            if (A * A + B * B < 1) {
+                if (c > 37) {
+                    n = (j = c & 1) ? 6 : 4;
+                    o = .5 / (a + .01) + C(b * 125) * 3 - a * 300;
+                    w = b * h;
+                    return [o * C(n) + w * S(n) + j * 610 - 390, o * S(n) - w * C(n) + 550 - j * 350, 1180 + C(B + A) * 99 - j * 300, .4 - a * .1 + P(1 - B * B, -h * 6) * .15 - a * b * .4 + C(a + b) / 5 + P(C((o * (a + 1) + (B > 0 ? w : -w)) / 25), 30) * .1 * (1 - B * B), o / 1e3 + .7 - o * w * 3e-6];
+                }
+                if (c > 32) {
+                    c = c * 1.16 - .15;
+                    o = a * 45 - 20;
+                    w = b * b * h;
+                    z = o * S(c) + w * C(c) + 620;
+                    return [o * C(c) - w * S(c), 28 + C(B * .5) * 99 - b * b * b * 60 - z / 2 - h, z, (b * b * .3 + P((1 - (A * A)), 7) * .15 + .3) * b, b * .7];
+                }
+                o = A * (2 - b) * (80 - c * 2);
+                w = 99 - C(A) * 120 - C(b) * (-h - c * 4.9) + C(P(1 - b, 7)) * 50 + c * 2;
+                z = o * S(c) + w * C(c) + 700;
+                return [o * C(c) - w * S(c), B * 99 - C(P(b, 7)) * 50 - c / 3 - z / 1.35 + 450, z, (1 - b / 1.2) * .9 + a * .1, P((1 - b), 20) / 4 + .05];
+            }
+        }
+
+        setInterval('for(i=0;i<1e4;i++)if(s=p(R(),R(),i%46/.74)){z=s[2];x=~~(s[0]*f/z-h);y=~~(s[1]*f/z-h);if(!m[q=y*f+x]|m[q]>z)m[q]=z,a.fillStyle="rgb("+~(s[3]*h)+","+~(s[4]*h)+","+~(s[3]*s[3]*-80)+")",a.fillRect(x,y,1,1)}', 0);
+    </script>
+
+</body>
+</html>
